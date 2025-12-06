@@ -1,12 +1,15 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-// Định nghĩa cấu trúc 1 học sinh
 const studentSchema = new Schema(
   {
-    name: { type: String, required: true }, // Họ tên
-    age: { type: Number, required: true }, // Tuổi
-    class: { type: String, required: true }, // Lớp
+    name: { type: String, required: true },
+    age: {
+      type: Number,
+      required: true,
+      min: [1, "Tuổi phải lớn hơn 0"], // MỚI: Validation của MongoDB
+    },
+    class: { type: String, required: true },
   },
   { collection: "students" }
 );

@@ -28,6 +28,10 @@ const HomePage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (Number(age) <= 0) {
+      alert("Vui lòng nhập tuổi hợp lệ (lớn hơn 0)!");
+      return; // Dừng lại, không gửi dữ liệu đi
+    }
     const studentData = { name, age: Number(age), class: stuClass };
     try {
       if (editingId) {
@@ -68,7 +72,7 @@ const HomePage = () => {
     setClass("");
   };
 
-  // === 1. Hàm xóa dấu tiếng Việt (MỚI) ===
+  // === 1. Hàm xóa dấu tiếng Việt  ===
   const removeAccents = (str) => {
     return str
       .normalize('NFD')
@@ -76,7 +80,7 @@ const HomePage = () => {
       .replace(/đ/g, 'd').replace(/Đ/g, 'D');
   };
 
-  // === 2. Áp dụng vào bộ lọc (SỬA LẠI) ===
+  // === 2. Áp dụng vào bộ lọc ===
   const filteredStudents = students.filter(student => {
     const nameNoAccents = removeAccents(student.name.toLowerCase());
     const searchNoAccents = removeAccents(searchTerm.toLowerCase());
@@ -84,7 +88,7 @@ const HomePage = () => {
   });
 
   const sortedStudents = [...filteredStudents].sort((a, b) => {
-    const nameA = removeAccents(a.name.toLowerCase()); // Sắp xếp cũng nên bỏ dấu cho chuẩn
+    const nameA = removeAccents(a.name.toLowerCase()); 
     const nameB = removeAccents(b.name.toLowerCase());
     return sortAsc 
       ? (nameA < nameB ? -1 : (nameA > nameB ? 1 : 0))

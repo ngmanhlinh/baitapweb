@@ -18,9 +18,14 @@ const StudentForm = ({
         />
         <input 
           className="form-input"
-          type="number" placeholder="Tuổi" required 
-          value={age} onChange={e => setAge(e.target.value)} 
-          style={{ maxWidth: "100px" }} // Tuổi không cần quá dài
+          type="number" 
+          placeholder="Tuổi" 
+          required 
+          min="1"  
+          value={age} 
+          onChange={e => setAge(e.target.value)} 
+          onKeyDown={(e) => ["-", "+", "e", "E"].includes(e.key) && e.preventDefault()}
+          style={{ maxWidth: "100px" }} 
         />
         <input 
           className="form-input"
